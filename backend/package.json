@@ -7,7 +7,8 @@
     "dev:tsc": "tsc --watch -p .",
     "dev:serve": "nodemon -e js -w lib lib/main.js",
     "dev": "run-p dev:*",
-    "test": "SET NODE_ENV=test && mocha -r ts-node/register test/**/*.test.ts"
+    "test": "SET NODE_ENV=test && mocha -r ts-node/register test/**/*.test.ts",
+    "docker:start": "npm run dev:serve"
   },
   "author": "jackyc",
   "license": "ISC",

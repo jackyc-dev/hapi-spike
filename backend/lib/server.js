@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.start = exports.init = exports.server = void 0;
 const hapi_1 = __importDefault(require("@hapi/hapi"));
+const hello_1 = require("./hello");
 const init = function () {
     return __awaiter(this, void 0, void 0, function* () {
         exports.server = hapi_1.default.server({
@@ -21,6 +22,12 @@ const init = function () {
             host: '0.0.0.0'
         });
         // Routes will go here
+        exports.server.route({
+            method: "GET",
+            path: "/",
+            handler: index
+        });
+        exports.server.route(hello_1.helloRoutes);
         return exports.server;
     });
 };
@@ -37,3 +44,7 @@ process.on('unhandledRejection', (err) => {
     console.error(err);
     process.exit(1);
 });
+function index(request) {
+    console.log("Processing request", request.info.id);
+    return "Hello! Nice to have met you.";
+}
