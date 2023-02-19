@@ -16,11 +16,12 @@ services:
   app:
     depends_on:
       - mysqldb
-    build: ./backend
-    restart: unless-stopped
+    build:
+      context: ./backend
+      dockerfile: backend-Dockerfile
     env_file: ./.env
     ports:
-      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+      - 8080:4000
     environment:
       - DB_HOST=mysqldb
       - DB_USER=$MYSQLDB_USER

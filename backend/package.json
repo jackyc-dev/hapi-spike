@@ -4,6 +4,7 @@
   "description": "backend api for the game tracker app",
   "main": "lib/main.js",
   "scripts": {
+    "build": "tsc --build --clean",
     "dev:tsc": "tsc --watch -p .",
     "dev:serve": "nodemon -e js -w lib lib/main.js",
     "dev": "run-p dev:*",
@@ -13,7 +14,10 @@
   "author": "jackyc",
   "license": "ISC",
   "dependencies": {
-    "@hapi/hapi": "^21.3.0"
+    "@hapi/hapi": "^21.3.0",
+    "mysql2": "^3.1.2",
+    "sequelize": "^6.28.0",
+    "sequelize-typescript": "^2.1.5"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",

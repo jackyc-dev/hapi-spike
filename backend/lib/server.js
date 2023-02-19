@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.start = exports.init = exports.server = void 0;
 const hapi_1 = __importDefault(require("@hapi/hapi"));
 const hello_1 = require("./hello");
+const index_1 = require("./controllers/healthcheck/index");
+const index_2 = require("./controllers/games/index");
 const init = function () {
     return __awaiter(this, void 0, void 0, function* () {
         exports.server = hapi_1.default.server({
@@ -28,6 +30,12 @@ const init = function () {
             handler: index
         });
         exports.server.route(hello_1.helloRoutes);
+        exports.server.route({
+            method: "GET",
+            path: "/healthcheck",
+            handler: index_1.healthCheckController.healthCheck
+        });
+        exports.server.route(index_2.libraryStatusRoutes);
         return exports.server;
     });
 };
