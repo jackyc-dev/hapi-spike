@@ -2,10 +2,9 @@
 
 import Hapi from "@hapi/hapi";
 import { Request, Server } from "@hapi/hapi";
-import { gamesController } from "./controllers/games";
 import { helloRoutes } from "./hello";
 import { healthCheckController } from './controllers/healthcheck/index';
-import { libraryStatusRoutes } from './controllers/games/index';
+import { gamesRoutes, libraryStatusRoutes } from './controllers/games/index';
 
 export let server: Server;
 
@@ -30,6 +29,7 @@ export const init = async function(): Promise<Server> {
         handler: healthCheckController.healthCheck
     });
 
+    server.route(gamesRoutes);
     server.route(libraryStatusRoutes);
 
     return server;

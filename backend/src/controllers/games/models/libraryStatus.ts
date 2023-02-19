@@ -10,7 +10,7 @@ class LibraryStatus extends Model<iLibraryStatus> { }
 
 LibraryStatus.init({
     id: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },
@@ -20,7 +20,7 @@ LibraryStatus.init({
     }
 }, {
     sequelize: initDBConnection(),
-    modelName: 'libraryStatuses',
+    tableName: 'libraryStatuses',
     updatedAt: false,
     createdAt: false
 });

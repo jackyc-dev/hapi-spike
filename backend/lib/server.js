@@ -35,6 +35,7 @@ const init = function () {
             path: "/healthcheck",
             handler: index_1.healthCheckController.healthCheck
         });
+        exports.server.route(index_2.gamesRoutes);
         exports.server.route(index_2.libraryStatusRoutes);
         return exports.server;
     });

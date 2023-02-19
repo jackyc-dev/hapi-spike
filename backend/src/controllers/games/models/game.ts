@@ -1,11 +1,45 @@
-import { iLibraryStatus } from "./libraryStatus";
+import { Model, DataTypes } from 'sequelize';
+import { initDBConnection } from '../../../utils/db/mysqlDbHelper';
+import LibraryStatus from './libraryStatus';
 
-export type game = {
+export interface iGame {
     id: number;
     title: string;
     // platforms: [];
     releaseDate: Date;
-    libraryStatus: iLibraryStatus;
-    ratings: number;
+    // libraryStatusId: number;
+    rating: number;
     // tags:[];
 }
+
+class Game extends Model<iGame> { }
+
+Game.init({
+    id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    releaseDate: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    rating: {
+        type: DataTypes.NUMBER,
+        allowNull: false
+    }
+}, {
+    sequelize: initDBConnection(),
+    tableName: 'games',
+    updatedAt: false,
+    createdAt: false
+})
+
+LibraryStatus.hasOne(Game);
+Game.belongsTo(LibraryStatus);
+
+export default Game;

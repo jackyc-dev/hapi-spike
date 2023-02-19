@@ -6,7 +6,7 @@ class LibraryStatus extends sequelize_1.Model {
 }
 LibraryStatus.init({
     id: {
-        type: sequelize_1.DataTypes.NUMBER,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },
@@ -16,7 +16,7 @@ LibraryStatus.init({
     }
 }, {
     sequelize: (0, mysqlDbHelper_1.initDBConnection)(),
-    modelName: 'libraryStatuses',
+    tableName: 'libraryStatuses',
     updatedAt: false,
     createdAt: false
 });

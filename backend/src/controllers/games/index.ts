@@ -1,21 +1,18 @@
 import { ServerRoute } from '@hapi/hapi';
-import { getAllLibraryStatuses } from './getAllLibraryStatuses';
-import LibraryStatus from './models/libraryStatus';
+import { gamesController } from './gameController';
+import { libraryStatusController } from './libraryStatusController';
 
-export const gamesController = {
-    
-};
 
-const libraryStatusController = {
-    getAllLibraryStatuses: async (): Promise<void | LibraryStatus[]> => {
-        try {
-            return await getAllLibraryStatuses();
-        } catch(err) {
-            console.log('ERROR - libraryStatusController.getAllLibraryStatuses:', err);
-        }
-        
+export const gamesRoutes: ServerRoute[] = [{
+        method: "GET",
+        path: "/game",
+        handler: gamesController.getAllGames
+    }, {
+        method: "GET",
+        path: "/game/id",
+        handler: gamesController.getGameById
     }
-}
+];
 
 export const libraryStatusRoutes: ServerRoute[] = [{
         method: "GET",
