@@ -7,7 +7,7 @@ export interface iGame {
     title: string;
     // platforms: [];
     releaseDate: Date;
-    // libraryStatusId: number;
+    libraryStatusId: number;
     rating: number;
     // tags:[];
 }
@@ -18,7 +18,9 @@ Game.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrementIdentity: true,
+        autoIncrement: true
     },
     title: {
         type: DataTypes.STRING,
@@ -27,6 +29,14 @@ Game.init({
     releaseDate: {
         type: DataTypes.DATEONLY,
         allowNull: false
+    },
+    libraryStatusId: {
+        type: DataTypes.NUMBER,
+        allowNull: false,
+        references: {
+            model: 'libraryStatuses',
+            key: 'id'
+        },
     },
     rating: {
         type: DataTypes.NUMBER,

@@ -17,12 +17,19 @@ const game_1 = __importDefault(require("./models/game"));
 const libraryStatus_1 = __importDefault(require("./models/libraryStatus"));
 const getAllGames = () => game_1.default.findAll({ include: libraryStatus_1.default });
 const getGameById = (id) => game_1.default.findByPk(id, { include: libraryStatus_1.default });
-// const putGame = async (payload: IGamePayload): Promise<Game | null> => {
-//     const newGame = await Game.create({ ...payload });
-//     newGame.setLibraryStatus
-//     await newGame.save();
-//     return newGame;
-// }
+const createGame = (payload) => {
+    return game_1.default.create(Object.assign(Object.assign({}, payload), { libraryStatusId: payload.libraryStatus.id }));
+};
+const updateGame = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const targetGame = yield game_1.default.findByPk(payload.id);
+    return targetGame === null || targetGame === void 0 ? void 0 : targetGame.update(Object.assign(Object.assign({}, payload), { libraryStatusId: payload.libraryStatus.id }));
+});
+const deleteGame = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const targetGame = yield game_1.default.findByPk(id);
+    return yield (targetGame === null || targetGame === void 0 ? void 0 : targetGame.destroy({
+        force: true
+    }));
+});
 exports.gamesController = {
     getAllGames: () => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -39,6 +46,34 @@ exports.gamesController = {
         }
         catch (err) {
             console.log('ERROR - gamesController.getGameById', err);
+        }
+    }),
+    createGame: (request) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const payload = request.payload;
+            return yield createGame(payload);
+        }
+        catch (err) {
+            console.log('ERROR - gamesController.createGame', err);
+        }
+    }),
+    updateGame: (request) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            let payload = request.payload;
+            payload.id = request.params.id;
+            return yield updateGame(payload);
+        }
+        catch (err) {
+            console.log('ERROR - gamesController.updateGame', err);
+        }
+    }),
+    deleteGame: (request) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const id = request.params.id;
+            return yield deleteGame(id);
+        }
+        catch (err) {
+            console.log('ERROR - gamesController.deleteGame', err);
         }
     })
 };

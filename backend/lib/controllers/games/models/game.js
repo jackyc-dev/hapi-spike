@@ -12,7 +12,9 @@ Game.init({
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrementIdentity: true,
+        autoIncrement: true
     },
     title: {
         type: sequelize_1.DataTypes.STRING,
@@ -21,6 +23,14 @@ Game.init({
     releaseDate: {
         type: sequelize_1.DataTypes.DATEONLY,
         allowNull: false
+    },
+    libraryStatusId: {
+        type: sequelize_1.DataTypes.NUMBER,
+        allowNull: false,
+        references: {
+            model: 'libraryStatuses',
+            key: 'id'
+        },
     },
     rating: {
         type: sequelize_1.DataTypes.NUMBER,

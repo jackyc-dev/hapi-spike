@@ -11,6 +11,18 @@ exports.gamesRoutes = [{
         method: "GET",
         path: "/game/id",
         handler: gameController_1.gamesController.getGameById
+    }, {
+        method: "POST",
+        path: "/game",
+        handler: gameController_1.gamesController.createGame
+    }, {
+        method: "POST",
+        path: "/game/{id}",
+        handler: gameController_1.gamesController.updateGame
+    }, {
+        method: "DELETE",
+        path: "/game/{id}",
+        handler: gameController_1.gamesController.deleteGame
     }
 ];
 exports.libraryStatusRoutes = [{
