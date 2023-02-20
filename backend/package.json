@@ -4,7 +4,7 @@
   "description": "backend api for the game tracker app",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc --build --clean",
+    "build": "tsc --build",
     "dev:tsc": "tsc --watch -p .",
     "dev:serve": "nodemon -e js -w lib lib/main.js",
     "dev": "run-p dev:*",
