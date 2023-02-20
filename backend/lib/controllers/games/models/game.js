@@ -35,6 +35,26 @@ Game.init({
     rating: {
         type: sequelize_1.DataTypes.NUMBER,
         allowNull: false
+    },
+    tags: {
+        type: sequelize_1.DataTypes.JSON,
+        allowNull: true,
+        get() {
+            return this.getDataValue("tags") || [];
+        },
+        set(value) {
+            return this.setDataValue("tags", value);
+        }
+    },
+    platforms: {
+        type: sequelize_1.DataTypes.JSON,
+        allowNull: true,
+        get() {
+            return this.getDataValue("platforms") || [];
+        },
+        set(value) {
+            return this.setDataValue("platforms", value);
+        }
     }
 }, {
     sequelize: (0, mysqlDbHelper_1.initDBConnection)(),

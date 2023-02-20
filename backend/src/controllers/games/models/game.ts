@@ -5,11 +5,11 @@ import LibraryStatus from './libraryStatus';
 export interface iGame {
     id: number;
     title: string;
-    // platforms: [];
+    platforms: string[];
     releaseDate: Date;
     libraryStatusId: number;
     rating: number;
-    // tags:[];
+    tags: string[];
 }
 
 class Game extends Model<iGame> { }
@@ -41,6 +41,26 @@ Game.init({
     rating: {
         type: DataTypes.NUMBER,
         allowNull: false
+    },
+    tags: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        get() {
+            return this.getDataValue("tags") || [];
+        },
+        set(value:string[]) {
+            return this.setDataValue("tags", value);
+        }
+    },
+    platforms: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        get() {
+            return this.getDataValue("platforms") || [];
+        },
+        set(value:string[]) {
+            return this.setDataValue("platforms", value);
+        }
     }
 }, {
     sequelize: initDBConnection(),
