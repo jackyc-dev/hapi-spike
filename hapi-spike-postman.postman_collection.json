@@ -77,12 +77,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/game",
+					"raw": "http://localhost:8080/game",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "8080",
 					"path": [
 						"game"
 					]
